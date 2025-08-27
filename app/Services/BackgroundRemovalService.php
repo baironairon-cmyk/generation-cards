@@ -13,7 +13,8 @@ class BackgroundRemovalService
         $bgRemovedPath = 'bg_removed/' . basename($imagePath);
 
         // Simulate background removal by copying file
-        Storage::copy($imagePath, $bgRemovedPath);
+        Storage::disk('public')->makeDirectory('bg_removed');
+        Storage::disk('public')->copy($imagePath, $bgRemovedPath);
 
         return $bgRemovedPath;
     }

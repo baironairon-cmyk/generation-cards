@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('user_id')->constrained()->onDelete('cascade');
             $table->string('original_path');
             $table->string('bg_removed_path')->nullable();
+            $table->json('generated_images')->nullable();
+            $table->json('product_card')->nullable();
             $table->timestamps();
         });
     }
