@@ -18,14 +18,12 @@ class ChatGPTService
             "Include color palettes, text styles, and themes based on: " . $productDescription .
             ". Provide output as JSON with keys: colors, text_styles, theme.";
 
-        $response = $this->client->chat()->create([
-            'model' => 'gpt-4o-mini',
-            'messages' => [
-                ['role' => 'user', 'content' => $prompt]
-            ]
+        $response = $this->client->responses()->create([
+            'model' => 'gpt-5',
+            'input' => "$prompt"
         ]);
 
-        $content = $response->choices[0]->message->content;
+        $content = $response->outputText;
 
         $templates = json_decode($content, true);
 
