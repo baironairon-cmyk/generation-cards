@@ -36,7 +36,10 @@ class ChatGPTService
                     'text_styles' => ['bold', 'italic'],
                     'theme' => 'Swimming pool'
                 ],
-                // Другие шаблоны...
+                ['colors' => ['#222222', '#ffffff'], 'text_styles' => ['bold', 'caps'], 'theme' => 'Minimalist contrast'],
+                ['colors' => ['#6d28d9', '#fef3c7'], 'text_styles' => ['serif', 'thin'], 'theme' => 'Premium luxury'],
+                ['colors' => ['#059669', '#ecfeff'], 'text_styles' => ['rounded', 'medium'], 'theme' => 'Eco fresh'],
+                ['colors' => ['#dc2626', '#fee2e2'], 'text_styles' => ['impact', 'shadow'], 'theme' => 'Sale highlight'],
             ];
         }
 
