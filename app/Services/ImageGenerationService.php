@@ -2,6 +2,7 @@
 namespace App\Services;
 
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Http;
 use OpenAI;
 
 class ImageGenerationService
@@ -24,15 +25,19 @@ class ImageGenerationService
                 'prompt' => 'Product card design for e-commerce marketplace, include clean layout, price badge, and space for product image. Theme: ' . $prompt,
                 'size' => '1024x1024',
                 'n' => 1,
-                'response_format' => 'b64_json',
             ]);
 
-            $b64 = $response->data[0]->b64_json ?? null;
-            if (!$b64) {
+            $url = $response->data[0]->url ?? null;
+            if (!$url) {
                 continue;
             }
 
-            $binary = base64_decode($b64);
+            $httpResponse = Http::get($url);
+            if (!$httpResponse->ok()) {
+                continue;
+            }
+
+            $binary = $httpResponse->body();
             $filename = 'generated/product_card_' . $i . '_' . uniqid() . '.png';
             Storage::disk('public')->put($filename, $binary);
             $generatedPaths[] = $filename;
